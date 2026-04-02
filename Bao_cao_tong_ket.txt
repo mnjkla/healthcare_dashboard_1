@@ -1,0 +1,45 @@
+# Báo Cáo: Hệ thống Theo dõi & Phân tích Chỉ số Sức khỏe
+
+## 1. Mục tiêu và Kiến trúc Hệ thống
+Hệ thống được xây dựng theo mô hình Full-stack nhằm lưu trữ, trực quan hóa và phân tích chuyên sâu các dữ liệu sinh trắc học của người dùng (nhịp tim, số bước chân, lượng calo, giấc ngủ, cân nặng).
+
+- **Backend (API & Database)**: Sử dụng Python FastAPI kết hợp cơ sở dữ liệu SQLite (healthcare.db). Đảm bảo lưu trữ dữ liệu bền vững và cung cấp API đồng bộ dữ liệu chuẩn RESTful.
+- **Frontend (Dashboard)**: Xây dựng bằng Streamlit với giao diện Dark-theme hiện đại, cao cấp (Premium UI), mang lại trải nghiệm tương tác trực quan cho người dùng.
+- **Xử lý & Trực quan hóa**: Sử dụng Pandas để xử lý tính toán số liệu và Plotly để vẽ biểu đồ động (interactive charts).
+
+## 2. Các Tính năng Đã Hoàn thiện trên Dashboard
+
+Giao diện người dùng được chia thành 5 phân hệ (Tabs) chính đáp ứng đầy đủ yêu cầu bài toán:
+
+### Bảng điều khiển Tổng cục (KPIs)
+- Thống kê sinh trắc học theo thời gian thực (Trung bình bước chân, Nhịp tim, Giấc ngủ, BMI theo chiều cao/cân nặng).
+- Tính toán và hiển thị Điểm Sức khỏe Tổng thể (Health Score) trên thang điểm 100.
+- Sidebar cho phép người dùng cấu hình cá nhân (chiều cao) và lọc khoảng thời gian cần phân tích.
+
+### Tab 1: Tổng quan Dữ liệu (Trực quan hóa)
+- Biểu đồ đường (Line chart): Theo dõi sự thay đổi nhịp tim theo ngày, có hiển thị "Vùng an toàn" (60-80 bpm).
+- Biểu đồ cột (Bar chart): Tổng số bước chân hàng ngày phân loại màu sắc tự động theo "Mức độ hoạt động" (Thấp/Trung bình/Cao) kèm mục tiêu 10.000 bước.
+- Biểu đồ kết hợp (Combo chart): Thể hiện mối tương quan trực quan giữa lượng Calories tiêu thụ và Sự thay đổi Cân nặng.
+- Biểu đồ diện tích (Area chart): Giám sát giấc ngủ với chỉ báo "Vùng ngủ lý tưởng" (7-9 tiếng/đêm).
+
+### Tab 2: Phân tích Chi tiết
+- Theo dõi biến động chỉ số BMI theo thời gian so với mức chuẩn (18.5 - 25).
+- Biểu đồ mật độ (Pie chart): Phân bố tỷ lệ mật độ hoạt động trong khoảng thời gian được chọn.
+- Ma trận tương quan (Correlation Heatmap): Áp dụng thuật toán thống kê hệ số tương quan giữa 5 biến số (Bước chân, Nhịp tim, Calo, Giấc ngủ, Cân nặng) giúp tìm ra quy luật sức khỏe lõi.
+- Chi tiết cơ cấu chấm điểm Sức khỏe (từ Nhịp tim nghỉ, Mức độ vận động, Thiếu hụt calo đến Thời lượng ngủ).
+
+### Tab 3: Phân tích Cải thiện Thể lực (Progress Tracking)
+- Phân tích và chấm điểm sự tiến bộ bằng cách so sánh dữ liệu lịch sử (Tuần 1 so với Tuần 4).
+- Biểu đồ Radar (Radar Chart): So sánh trực quan đa chiều sự thay đổi toàn diện của các chỉ số sinh học giữa đầu chu kỳ và cuối chu kỳ.
+- Bảng báo cáo xu hướng (Trend analysis) hiển thị phần trăm tăng/giảm chi tiết cho từng chỉ số cụ thể.
+
+### Tab 4: Hệ thống Gợi ý Tập luyện
+- Dựa vào kết quả phân tích số liệu, hệ thống tự động sinh ra các Gợi ý chế độ tập luyện mang tính cá nhân hóa.
+- Phân loại rõ các hành động theo mức độ ưu tiên (Cao, Trung bình, Thấp) để người dùng dễ dàng khắc phục điểm yếu cơ thể hiện tại.
+
+### Tab 5: Trợ lý Sức khỏe AI Chatbot
+- Tích hợp một Chatbot mô phỏng AI phân tích dữ liệu trực tiếp trong hệ thống.
+- Người dùng có thể chat và hỏi các câu hỏi về sức khỏe cá nhân. Trợ lý sẽ đọc dữ liệu từ Dataframe và trả lời sát với thể trạng thực tế.
+
+---
+Hệ thống hoàn chỉnh từ tầng dữ liệu (SQLite), Backend API (FastAPI) đến Frontend (Streamlit) đã sẵn sàng hoạt động.

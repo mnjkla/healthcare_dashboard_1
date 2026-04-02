@@ -1,0 +1,16 @@
+﻿Analyzing healthcare_dashboard...                               
+
+  error - The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.  - lib\main.dart:36:20 - argument_type_not_assignable
+warning - Unused import: 'package:flutter/material.dart' - lib\models\activity_model.dart:1:8 - unused_import
+   info - The constant name 'Walking' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:21 - constant_identifier_names
+   info - The constant name 'Running' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:30 - constant_identifier_names
+   info - The constant name 'Cycling' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:39 - constant_identifier_names
+   info - The constant name 'Swimming' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:48 - constant_identifier_names
+   info - The constant name 'Gym' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:58 - constant_identifier_names
+   info - The constant name 'Yoga' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:63 - constant_identifier_names
+   info - The constant name 'Other' isn't a lowerCamelCase identifier - lib\models\activity_model.dart:3:69 - constant_identifier_names
+warning - The value of the local variable 'typeController' isn't used - lib\screens\activity_screen.dart:58:11 - unused_local_variable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\dss_screen.dart:61:26 - deprecated_member_use
+  error - The named parameter 'maxWidth' isn't defined - lib\screens\login_screen.dart:22:11 - undefined_named_parameter
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\profile_screen.dart:76:36 - deprecated_member_use
+

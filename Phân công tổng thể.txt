@@ -1,0 +1,8 @@
+Hệ thống Theo dõi và Phân tích Chỉ số Sức khỏe (Health & Fitness Tracker Dashboard)
+Nếu bạn muốn kết hợp dữ liệu từ các thiết bị IoT hoặc Mobile Sensor.
+
+Dữ liệu: Nhịp tim, số bước chân, lượng calo tiêu thụ, giờ ngủ.
+
+Trực quan hóa: Biểu đồ kết hợp (thể hiện sự thay đổi cân nặng so với lượng calo nạp vào), biểu đồ mật độ (thời gian hoạt động trong ngày).
+
+Thống kê/Phân tích: Tính toán chỉ số BMI, thống kê mức độ cải thiện thể lực sau 1 tháng. Gợi ý chế độ tập luyện dựa trên các chỉ số sinh học thu thập được.

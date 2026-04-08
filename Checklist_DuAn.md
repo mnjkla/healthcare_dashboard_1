@@ -16,14 +16,18 @@ Dưới đây là checklist tổng hợp toàn bộ các tính năng đã đư�
 - [x] 🌡️ **Ma trận tương quan** (Correlation Heatmap) giữa các chỉ số cơ thể.
 - [x] 🥧 Phân tích **Mật độ hoạt động** (Cardio, Active, Sedentary).
 
-## 3. Trí tuệ Nhân tạo & Gợi ý (AI & Recommendations)
-- [x] 🏃 Sinh **Gợi ý tập luyện tự động** (Exercise Recommendations) ưu tiên theo tình trạng sức khỏe cụ thể.
+## 3. Trí tuệ Nhân tạo & Gợi ý Y khoa (Kiến trúc Đa Người dùng)
+- [x] 👥 Tích hợp kiến trúc **Multi-User (Đa người dùng)** hoàn chỉnh cùng file lưu trữ độc lập.
+- [x] 🏥 Quản lý Context **Độ Tuổi và Bệnh lý Nền** (Tim mạch, Tiểu đường) tự động theo profile đăng nhập.
+- [x] 🏃 Sinh **Gợi ý tập luyện tự động** chống chỉ định y khoa (Cấm tập nặng nếu bệnh tim mạch).
 - [x] 🤖 Tích hợp **Chatbot Trợ lý Sức khỏe AI** có khả năng nhúng ngầm (contextualize) dữ liệu thật của người dùng để trả lời sát thực tế nhất.
+- [x] 🚨 **Khóa an toàn Z-Score Anomaly**: Module `detect_anomalies` tự động quét gai nhịp tim / giấc ngủ bất thường và chèn cảnh báo đỏ tức thì lên màn hình.
 
-## 4. Tích hợp Mô phỏng Thiết bị Thực (IoT & Real-time)
-- [x] 📡 Tạo script độc lập **Giả lập thiết bị IoT (`simulator_device.py`)**: Tự động sinh dữ liệu đo lường mới mẻ theo quy luật Random-walk và đẩy vào Data source mỗi 5 giây.
-- [x] 🔄 Cơ chế **Auto-Refresh (Live Data)** trên Dashboard để tải lại thay đổi đồ thị biểu diễn theo thời gian thực (Real-time).
-- [x] 🎮 **Cơ chế tương tác 2 chiều (Remote Control)**: Thanh trượt trên web hỗ trợ cập nhật "cân nặng mục tiêu" xuống file `sim_config.json`, tác động trực tiếp đến thuật toán sinh dữ liệu của thiết bị mô phỏng.
+## 4. Tích hợp Mô phỏng Thiết bị Thực (IoT Multi-Threading)
+- [x] 📡 Tạo **Server IoT Hub (`simulator_device.py`)**: Tự động sinh dữ liệu mới và chạy vòng lặp xử lý đồng thời (Multi-threading) cho tất cả các user.
+- [x] 🧨 Cơ chế **Bắn Tín Hiệu Lỗi (Anomaly Inject)**: Thiết bị thi thoảng cố tình gửi thông số đo lỗi vượt ngưỡng nhằm test hệ thống cảnh báo của Dashboard.
+- [x] 🔄 Cơ chế **Auto-Refresh** hiển thị Live Data.
+- [x] 🎮 **Cơ chế tương tác 2 chiều (Remote Control)** cá nhân hóa bằng file JSON độc lập cho mỗi user.
 
 ---
 **💡 Ghi chú dành cho Báo cáo:** Mọi tính năng cốt lõi trên đã hoàn toàn chạy tốt trên framework Streamlit và Pandas, phù hợp cho bài đánh giá/bảo vệ đồ án môn học.

@@ -1,0 +1,191 @@
+{
+  "dailyActivity": {
+    "cols": [
+      "Id",
+      "ActivityDate",
+      "TotalSteps",
+      "TotalDistance",
+      "TrackerDistance",
+      "LoggedActivitiesDistance",
+      "VeryActiveDistance",
+      "ModeratelyActiveDistance",
+      "LightActiveDistance",
+      "SedentaryActiveDistance",
+      "VeryActiveMinutes",
+      "FairlyActiveMinutes",
+      "LightlyActiveMinutes",
+      "SedentaryMinutes",
+      "Calories"
+    ],
+    "shape": [
+      940,
+      15
+    ],
+    "sample": {
+      "Id": {
+        "0": 1503960366,
+        "1": 1503960366
+      },
+      "ActivityDate": {
+        "0": "4/12/2016",
+        "1": "4/13/2016"
+      },
+      "TotalSteps": {
+        "0": 13162,
+        "1": 10735
+      },
+      "TotalDistance": {
+        "0": 8.5,
+        "1": 6.96999979019165
+      },
+      "TrackerDistance": {
+        "0": 8.5,
+        "1": 6.96999979019165
+      },
+      "LoggedActivitiesDistance": {
+        "0": 0.0,
+        "1": 0.0
+      },
+      "VeryActiveDistance": {
+        "0": 1.87999999523163,
+        "1": 1.57000005245209
+      },
+      "ModeratelyActiveDistance": {
+        "0": 0.550000011920929,
+        "1": 0.689999997615814
+      },
+      "LightActiveDistance": {
+        "0": 6.05999994277954,
+        "1": 4.71000003814697
+      },
+      "SedentaryActiveDistance": {
+        "0": 0.0,
+        "1": 0.0
+      },
+      "VeryActiveMinutes": {
+        "0": 25,
+        "1": 21
+      },
+      "FairlyActiveMinutes": {
+        "0": 13,
+        "1": 19
+      },
+      "LightlyActiveMinutes": {
+        "0": 328,
+        "1": 217
+      },
+      "SedentaryMinutes": {
+        "0": 728,
+        "1": 776
+      },
+      "Calories": {
+        "0": 1985,
+        "1": 1797
+      }
+    }
+  },
+  "sleep": {
+    "cols": [
+      "Id",
+      "SleepDay",
+      "TotalSleepRecords",
+      "TotalMinutesAsleep",
+      "TotalTimeInBed"
+    ],
+    "shape": [
+      413,
+      5
+    ]
+  },
+  "weight": {
+    "cols": [
+      "Id",
+      "Date",
+      "WeightKg",
+      "WeightPounds",
+      "Fat",
+      "BMI",
+      "IsManualReport",
+      "LogId"
+    ],
+    "shape": [
+      67,
+      8
+    ]
+  },
+  "cardio": {
+    "cols": [
+      "id",
+      "age",
+      "gender",
+      "height",
+      "weight",
+      "ap_hi",
+      "ap_lo",
+      "cholesterol",
+      "gluc",
+      "smoke",
+      "alco",
+      "active",
+      "cardio"
+    ],
+    "shape": [
+      70000,
+      13
+    ],
+    "sample": {
+      "id": {
+        "0": 0,
+        "1": 1
+      },
+      "age": {
+        "0": 18393,
+        "1": 20228
+      },
+      "gender": {
+        "0": 2,
+        "1": 1
+      },
+      "height": {
+        "0": 168,
+        "1": 156
+      },
+      "weight": {
+        "0": 62.0,
+        "1": 85.0
+      },
+      "ap_hi": {
+        "0": 110,
+        "1": 140
+      },
+      "ap_lo": {
+        "0": 80,
+        "1": 90
+      },
+      "cholesterol": {
+        "0": 1,
+        "1": 3
+      },
+      "gluc": {
+        "0": 1,
+        "1": 1
+      },
+      "smoke": {
+        "0": 0,
+        "1": 0
+      },
+      "alco": {
+        "0": 0,
+        "1": 0
+      },
+      "active": {
+        "0": 1,
+        "1": 1
+      },
+      "cardio": {
+        "0": 0,
+        "1": 1
+      }
+    }
+  }
+}

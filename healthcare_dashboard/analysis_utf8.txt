@@ -1,7 +1,0 @@
-﻿Analyzing healthcare_dashboard...                               
-
-  error - The method 'toDouble' isn't defined for the type 'MapEntry' - lib\main.dart:150:52 - undefined_method
-  error - The operator '/' isn't defined for the type 'MapEntry<String, double>' - lib\main.dart:195:52 - undefined_operator
-  error - The method 'toDouble' isn't defined for the type 'MapEntry' - lib\main.dart:223:52 - undefined_method
-  error - The name 'MyApp' isn't a class - test\widget_test.dart:16:35 - creation_with_non_type
-

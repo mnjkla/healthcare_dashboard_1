@@ -1,0 +1,33 @@
+============================================================
+  DATA QUALITY REPORT — Healthcare Dashboard
+  Generated: 2026-04-08 22:38:55
+============================================================
+
+[1] FITBIT — Daily Activity
+  Rows: 1259, Users: 35
+  Date range: 2016-03-12 → 2016-05-12
+  Rows with 0 steps (removed): 0
+  Steps range: 4 – 36019
+  Calories range: 50 – 4900
+
+[2] FITBIT — Sleep Data
+  Rows: 413, Users: 24
+  Missing sleep records (imputed): 637 (estimate)
+  Sleep hours range: 1.0 – 13.3 h
+  Avg sleep efficiency: 91.7%
+
+[3] FITBIT — Weight Log
+  Rows: 67, Users: 8
+  Weight range: 52.5999984741211 – 133.5 kg
+  BMI range: 21.5 – 47.5
+
+[4] CARDIOVASCULAR DISEASE — 70,000 patients
+  Rows: 70000, Columns: 13
+  Age range: 29 – 64 years
+  BP outliers removed: 247 rows (0.4%)
+  Cardio disease rate: 50.0%
+  Normal SBP (p10-p90): 110 – 150 mmHg
+
+============================================================
+  ✅ Pipeline completed successfully
+============================================================

@@ -1,0 +1,71 @@
+{
+  "30-40": {
+    "ap_hi_normal": [
+      100.0,
+      120.0
+    ],
+    "ap_lo_normal": [
+      69.0,
+      80.0
+    ],
+    "ap_hi_warning": 120.0,
+    "ap_hi_danger": 130.0,
+    "bmi_mean": 25.642614528556393,
+    "sample_count": 2608
+  },
+  "40-50": {
+    "ap_hi_normal": [
+      100.0,
+      130.0
+    ],
+    "ap_lo_normal": [
+      70.0,
+      80.0
+    ],
+    "ap_hi_warning": 130.0,
+    "ap_hi_danger": 140.0,
+    "bmi_mean": 26.098439525191473,
+    "sample_count": 12760
+  },
+  "50-60": {
+    "ap_hi_normal": [
+      110.0,
+      140.0
+    ],
+    "ap_lo_normal": [
+      70.0,
+      90.0
+    ],
+    "ap_hi_warning": 140.0,
+    "ap_hi_danger": 140.0,
+    "bmi_mean": 26.735091095949212,
+    "sample_count": 16408
+  },
+  "60-70": {
+    "ap_hi_normal": [
+      110.0,
+      140.0
+    ],
+    "ap_lo_normal": [
+      70.0,
+      90.0
+    ],
+    "ap_hi_warning": 140.0,
+    "ap_hi_danger": 155.49999999999955,
+    "bmi_mean": 27.325153792544825,
+    "sample_count": 2939
+  },
+  "glucose_distribution": {
+    "1": 0.85,
+    "3": 0.076,
+    "2": 0.074
+  },
+  "cardio_risk_by_age": {
+    "<30": 0.0,
+    "30-40": 0.225,
+    "40-50": 0.389,
+    "50-60": 0.529,
+    "60-70": 0.695,
+    "70+": NaN
+  }
+}

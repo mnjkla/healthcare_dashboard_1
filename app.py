@@ -133,9 +133,9 @@ COLORS = {
 
 # --- Hệ thống Đăng nhập ---
 USERS = {
-    "admin": {"height": 170, "gender": "Nam", "pref": "Gym"},
-    "user1": {"height": 160, "gender": "Nữ", "pref": "Yoga"},
-    "user2": {"height": 175, "gender": "Nam", "pref": "Chạy bộ"}
+    "admin": {"height": 170, "gender": "Nam", "pref": "Gym", "age": 28, "condition": "Bình thường"},
+    "user1": {"height": 160, "gender": "Nữ", "pref": "Yoga", "age": 45, "condition": "Tim mạch"},
+    "user2": {"height": 175, "gender": "Nam", "pref": "Chạy bộ", "age": 55, "condition": "Tiểu đường"}
 }
 
 if 'logged_in' not in st.session_state:
@@ -166,13 +166,15 @@ if not st.session_state['logged_in']:
 # KHU VỰC SAU KHI ĐĂNG NHẬP (DASHBOARD)
 # ==========================================
 username = st.session_state['username']
-user_info = USERS.get(username, {"height": 170, "gender": "Nam", "pref": "Gym"})
+user_info = USERS.get(username, {"height": 170, "gender": "Nam", "pref": "Gym", "age": 30, "condition": "Bình thường"})
 
 # --- Load Data ---
 df = analysis.load_data(f"data_{username}.csv")
+anomalies = analysis.detect_anomalies(df, user_info['age'], user_info['condition'])
 
 # --- Sidebar ---
 st.sidebar.markdown(f"## 🏥 Xin chào, `{username}`")
+st.sidebar.markdown(f"**Độ tuổi:** {user_info['age']} | **Bệnh lý:** *{user_info['condition']}*")
 st.sidebar.divider()
 
 st.sidebar.markdown("### ⚙️ Cá nhân hóa AI")
@@ -181,6 +183,8 @@ gender_list = ["Nam", "Nữ", "Khác"]
 gender = st.sidebar.selectbox("⚧ Giới tính", gender_list, index=gender_list.index(user_info["gender"]))
 pref_list = ["Gym", "Yoga", "Chạy bộ", "Bơi lội", "Đạp xe", "Thiền"]
 pref = st.sidebar.selectbox("🏅 Sở thích tập luyện", pref_list, index=pref_list.index(user_info["pref"]))
+
+risk_score = analysis.calculate_risk_score(df, height_cm, user_info['age'], user_info['condition'])
 
 st.sidebar.divider()
 st.sidebar.markdown("### 📅 Khoảng thời gian")
@@ -202,6 +206,17 @@ else:
 st.sidebar.divider()
 st.sidebar.markdown("### 📊 Thông tin dữ liệu")
 st.sidebar.info(f"📅 {len(filtered_df)} ngày dữ liệu\n\n🗓️ {filtered_df['date'].min().strftime('%d/%m/%Y')} → {filtered_df['date'].max().strftime('%d/%m/%Y')}")
+
+# Risk Score display
+risk_color = '#10b981' if risk_score < 3 else '#f59e0b' if risk_score < 6 else '#ef4444'
+risk_label = 'Thấp ✅' if risk_score < 3 else 'Trung bình ⚠️' if risk_score < 6 else 'Cao 🚨' if risk_score < 8 else 'Rất cao 🆘'
+st.sidebar.markdown(f"""
+<div style='background:rgba(0,0,0,0.3);border:1px solid {risk_color};border-radius:12px;padding:12px;text-align:center;margin-top:8px'>
+  <div style='color:#b8b8ff;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px'>RISK SCORE</div>
+  <div style='color:{risk_color};font-size:2rem;font-weight:800'>{risk_score}/10</div>
+  <div style='color:{risk_color};font-size:0.9rem'>{risk_label}</div>
+</div>
+""", unsafe_allow_html=True)
 
 st.sidebar.divider()
 st.sidebar.markdown("### 🔄 Đồng bộ Dữ liệu IoT")
@@ -257,11 +272,18 @@ if st.sidebar.button("🚪 Đăng xuất", use_container_width=True):
     # Xoá cache thanh slider của cấu hình cũ để không bị lây chéo
     if 'target_w' in st.session_state:
         del st.session_state['target_w']
+    # Xoá lịch sử chat của user cũ
+    if 'messages' in st.session_state:
+        del st.session_state['messages']
     st.rerun()
 
 # --- Header ---
 st.markdown("# 🏥 Health & Fitness Tracker Dashboard")
-st.markdown("*Hệ thống Theo dõi và Phân tích Chỉ số Sức khỏe*")
+st.markdown("*Hệ thống Theo dõi và Phân tích Chỉ số Sức khỏe Đa Người dùng*")
+
+if anomalies:
+    for anomaly in anomalies:
+        st.error(f"🚨 **CẢNH BÁO Y TẾ:** {anomaly}")
 
 # --- KPI Cards ---
 stats = analysis.get_summary_stats(filtered_df)
@@ -295,6 +317,12 @@ with col5:
     st.metric("⚖️ BMI", f"{bmi}", f"({bmi_cat})", delta_color="off")
 
 st.markdown("")
+
+# Risk score banner
+if risk_score >= 8:
+    st.error(f"🆘 **RỦI RO RẤT CAO ({risk_score}/10):** Hệ thống khuyến nghị gặp bác sĩ sớm!")
+elif risk_score >= 6:
+    st.warning(f"🚨 **Rủi ro sức khỏe CAO ({risk_score}/10)** — Cần theo dõi sát các chỉ số!")
 
 # === TABS ===
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -559,7 +587,7 @@ with tab4:
     st.caption("Dựa trên hệ thống phân tích kết hợp Môn thể thao yêu thích của bạn")
     st.markdown("")
     
-    recs = analysis.get_exercise_recommendations(filtered_df, height_cm, gender, pref)
+    recs = analysis.get_exercise_recommendations(filtered_df, height_cm, gender, pref, user_info['age'], user_info['condition'], anomalies)
     
     for rec in recs:
         priority_class = {
@@ -588,30 +616,53 @@ with tab4:
 # TAB 5: CHATBOX TRỢ LÝ SỨC KHỎE
 # ==========================================
 with tab5:
-    st.subheader("🤖 Trợ lý Sức khỏe AI")
-    st.caption("Hỏi tôi bất cứ điều gì về sức khỏe của bạn, tôi sẽ phân tích dữ liệu và đưa ra lời khuyên!")
+    st.subheader("🤖 Trợ lý Quyết định Sức khỏe")
+    st.caption(f"Phân tích dữ liệu thực từ Fitbit (35 người dùng) + Cardiovascular 70,000 bệnh nhân | Risk Score hôm nay: **{risk_score}/10**")
+
+    # ── Quick Action Buttons ──────────────────────────────────────────────────
+    st.markdown("**⚡ Câu hỏi nhanh:**")
+    qa_col1, qa_col2, qa_col3, qa_col4 = st.columns(4)
+    quick_prompt = None
+    with qa_col1:
+        if st.button("🏃 Có nên tập hôm nay?", use_container_width=True):
+            quick_prompt = "hom nay co nen tap khong"
+    with qa_col2:
+        if st.button("🍽️ Hôm nay ăn gì?", use_container_width=True):
+            quick_prompt = "hom nay an gi"
+    with qa_col3:
+        if st.button("🚨 Tôi đang nguy hiểm không?", use_container_width=True):
+            quick_prompt = "toi co dang nguy hiem khong"
+    with qa_col4:
+        if st.button("📊 Tổng quan sức khỏe", use_container_width=True):
+            quick_prompt = "tổng quan sức khỏe"
+
     st.markdown("")
-    
+
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = [
-            {"role": "assistant", "content": analysis.chatbot_response("xin chào", filtered_df, height_cm, gender, pref)}
+            {"role": "assistant", "content": analysis.chatbot_response("xin chào", filtered_df, height_cm, gender, pref, user_info['age'], user_info['condition'], anomalies)}
         ]
-    
+
+    # Handle quick action button press
+    if quick_prompt:
+        st.session_state.messages.append({"role": "user", "content": quick_prompt})
+        resp_qa = analysis.chatbot_response(quick_prompt, filtered_df, height_cm, gender, pref, user_info['age'], user_info['condition'], anomalies)
+        st.session_state.messages.append({"role": "assistant", "content": resp_qa})
+        st.rerun()
+
     # Display chat history
     for message in st.session_state.messages:
         with st.chat_message(message["role"], avatar="🤖" if message["role"] == "assistant" else "👤"):
             st.markdown(message["content"])
     
     # Chat input
-    if prompt := st.chat_input("Hỏi về sức khỏe... (VD: BMI, nhịp tim, giấc ngủ, tập luyện...)"):
-        # Display user message
+    if prompt := st.chat_input("Hỏi trực tiếp: 'Hôm nay có nên tập không?', 'Tôi đang nguy hiểm không?', 'Hôm nay ăn gì?'..."):
         with st.chat_message("user", avatar="👤"):
             st.markdown(prompt)
         st.session_state.messages.append({"role": "user", "content": prompt})
         
-        # Generate and display response
-        response = analysis.chatbot_response(prompt, filtered_df, height_cm, gender, pref)
+        response = analysis.chatbot_response(prompt, filtered_df, height_cm, gender, pref, user_info['age'], user_info['condition'], anomalies)
         with st.chat_message("assistant", avatar="🤖"):
             st.markdown(response)
         st.session_state.messages.append({"role": "assistant", "content": response})
